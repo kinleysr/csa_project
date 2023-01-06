@@ -1,10 +1,10 @@
 
 import java.awt.*;
 import javax.swing.*;
-
-import org.w3c.dom.events.MouseEvent;
-
 import java.awt.event.*;
+import java.util.Random;
+import java.util.*;
+
 
 public class MyGraphics extends JPanel implements MouseListener{
     //glass Glass = new glass();
@@ -15,27 +15,33 @@ public class MyGraphics extends JPanel implements MouseListener{
    glass gl = new glass();
 	
    public MyGraphics() {
+      //System.out.println("start");
       JFrame easel = new JFrame();		
       easel.setSize (myWindowWidth, myWindowHeight);
       easel.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
       easel.add (this);
+      addMouseListener(this);
       easel.setVisible (true);
+      //System.out.println("y");
+
       
    }
 	
    public void paintComponent (Graphics g) {
-    super.repaint();
-    drawGlass(g, 200, Color.black);
-    drawDot(g, Color.pink,203 , 350);
+   super.repaint();
+   setUp(g);
+   //System.out.println("xxx");
+   //  drawGlass(g, 200, Color.black);
+   //  drawDot(g, Color.pink,203 , 350);
    }
 
-   public void drawGlass(Graphics g, int xpos, Color c){
+   public void drawGlass(Graphics g, int xpos){
     Graphics2D g2 = (Graphics2D) g;
     g2.setStroke(new BasicStroke(7));
-    g.setColor(c);
-    g2.drawLine(xpos, 400,xpos, 200);
+    
+    g2.drawLine(xpos, 400,xpos, 150);
     g2.drawLine(xpos, 400, xpos+50,400);
-    g2.drawLine(xpos+50, 400, xpos+50, 200);
+    g2.drawLine(xpos+50, 400, xpos+50, 150);
     // g.setColor(c);
     // g2.drawString("...", 100, 100);
     // g2.fillOval(xpos, 50, 140, 140);
@@ -52,7 +58,7 @@ public class MyGraphics extends JPanel implements MouseListener{
    public void fillGlass(Graphics g, int glassNum){
       int temp = 0;
       while (temp < 5){
-         drawDot(g, gl.chooseColor(), glassNum, 400- (temp*43 + 5));
+        drawDot(g, gl.chooseColor(), glassNum*100+4, 400-((temp+1)*43 + 5));
          temp++;
       }
    }
@@ -63,13 +69,25 @@ public class MyGraphics extends JPanel implements MouseListener{
    }
    public void setUp(Graphics g){
       int temp = 0;
-      while (temp < 6){
-         drawGlass(g, temp*10, Color.black);
-         fillGlass(g, temp);
+      ArrayList<ArrayList<dot>> dlist = new ArrayList<ArrayList<dot>>();
+      dlist = gl.getDotList();
+
+      for(ArrayList<dot> l: dlist){
+         for (dot d: l){
+            drawGlass(g, temp*100);
+            fillGlass(g, temp);
+         }
          temp++;
       }
-      
    }
+      // while (temp < 6){
+      //    drawGlass(g, temp*100, gl.chooseColor());
+      //    fillGlass(g, temp);
+      //    temp++;
+      // }
+
+      
+   
    public void mouseClicked(MouseEvent event){
 
    }
