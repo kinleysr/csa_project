@@ -8,7 +8,7 @@ public class glass {
     ArrayList<ArrayList<dot>> big = new ArrayList<ArrayList<dot>>();
     ArrayList<color> c= new ArrayList<color>();
     ArrayList<dot> empty = new ArrayList<dot>();
-    graphics g = new graphics();
+    //graphics g = new graphics();
     // ArrayList<dot> glass1 = new ArrayList<dot>();
     // ArrayList<dot> glass2 = new ArrayList<dot>();
     // ArrayList<dot> glass3 = new ArrayList<dot>();
